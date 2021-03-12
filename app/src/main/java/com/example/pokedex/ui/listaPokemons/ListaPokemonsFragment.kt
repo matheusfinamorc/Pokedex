@@ -14,7 +14,6 @@ import com.example.pokedex.MyApplication
 import com.example.pokedex.R
 import com.example.pokedex.adapter.PokemonAdapter
 import kotlinx.android.synthetic.main.lista_pokemons.*
-import retrofit2.Response
 
 class ListaPokemonsFragment: Fragment() {
 

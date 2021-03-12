@@ -2,6 +2,8 @@ package com.example.pokedex.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.pokedex.R
 
@@ -12,6 +14,4 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
 
     }
-
-
 }
