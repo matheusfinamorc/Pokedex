@@ -60,6 +60,7 @@ class ListaPokemonsFragment: Fragment() {
             if (resposta.isSuccessful) {
                 resposta.body()?.let { pokemons ->
                     adapter?.add(pokemons.pokemons)
+                    //Log.i("Response", pokemons.pokemons[0].nome)
                 }
             } else {
                 Log.i("Response", resposta.errorBody().toString())

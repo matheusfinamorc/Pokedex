@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.pokedex.R
 import com.example.pokedex.model.PokemonItem
 import kotlinx.android.synthetic.main.item_pokemon.view.*
@@ -42,11 +44,19 @@ class PokemonAdapter(
 
             private lateinit var pokemon: PokemonItem
             private val campoNome by lazy { itemView.item_pokemon_nome }
+            //private val campoTipo by lazy { itemView.item_pokemon_tipo }
+            private val campoImagem by lazy { itemView.pokemon_imagem_card }
 
 
         fun vincula(pokemonItem: PokemonItem){
             this.pokemon = pokemonItem
             campoNome.text = pokemonItem.nome
+            //campoTipo.text = pokemonItem.tipo.toString()
+            Glide.with(itemView)
+                    .load(pokemon.imagemURL)
+                    .transform(CenterCrop())
+                    .into(campoImagem)
         }
+
     }
 }

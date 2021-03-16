@@ -13,5 +13,6 @@ class PokedexRepository(
       suspend fun getPokemons(): Response<PokemonsResponse>{
           return api.getPokemon()
       }
+
 }
 

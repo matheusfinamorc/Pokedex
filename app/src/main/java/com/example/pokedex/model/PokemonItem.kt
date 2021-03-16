@@ -10,5 +10,8 @@ import java.io.Serializable
 data class PokemonItem(
     @PrimaryKey(autoGenerate = false)
     val id: String,
-    @SerializedName("name") val nome: String
+    @SerializedName("name") val nome: String,
+    //@SerializedName("types") val tipo: ArrayList<TiposPokemons>,
+    @SerializedName("small") val imagemURL: String
+
 ): Serializable
