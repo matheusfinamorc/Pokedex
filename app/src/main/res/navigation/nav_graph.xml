@@ -24,6 +24,24 @@
         android:id="@+id/listaPokemons"
         tools:layout="@layout/lista_pokemons"
         android:name="com.example.pokedex.ui.listaPokemons.ListaPokemonsFragment"
-        android:label="Lista de Pokemons" />
+        android:label="Lista de Pokemons">
+        <action
+            android:id="@+id/action_listaPokemons_to_detalhesPokemons"
+            app:destination="@id/detalhesPokemons"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detalhesPokemons"
+        tools:layout="@layout/detalhes_pokemon"
+        android:name="com.example.pokedex.ui.detalhesPokemons.DetalhesPokemonsFragment"
+        android:label="Detalhes Pokemons" >
+        <argument
+            android:name="pokemonId"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

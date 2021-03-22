@@ -3,6 +3,7 @@ package com.example.pokedex.dao
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
+import com.example.pokedex.model.PokemonData
 import com.example.pokedex.model.PokemonItem
 import kotlinx.coroutines.flow.Flow
 

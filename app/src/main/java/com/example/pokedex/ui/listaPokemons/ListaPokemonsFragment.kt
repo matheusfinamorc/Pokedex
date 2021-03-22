@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.MyApplication
 import com.example.pokedex.R
 import com.example.pokedex.adapter.PokemonAdapter
+import com.example.pokedex.model.PokemonItem
 import kotlinx.android.synthetic.main.lista_pokemons.*
 
 class ListaPokemonsFragment: Fragment() {
@@ -51,9 +53,11 @@ class ListaPokemonsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configuraRecyclerView()
+        configuraLista()
+
     }
 
-    //
+    // chama os pokemons para a lista
     private fun getPokemons() {
         viewModel.getPokemons()
         viewModel.mResponse.observe(this, { resposta ->
@@ -69,10 +73,27 @@ class ListaPokemonsFragment: Fragment() {
         })
     }
 
+    // configura a lista e manda para o detalhe do item clicado
+    private fun configuraLista(){
+        adapter?.onItemClickListener = {
+            goToDetalhes(it)
+        }
+        lista_pokemons_recyclerView.adapter = adapter
+        lista_pokemons_recyclerView.layoutManager = LinearLayoutManager(context)
+    }
+
+
 
     private fun configuraRecyclerView() {
         val divisor = DividerItemDecoration(context, VERTICAL)
         lista_pokemons_recyclerView.addItemDecoration(divisor)
         lista_pokemons_recyclerView.adapter = adapter
+    }
+
+    // acao de ir para os detalhes do pokemon clicado
+    private fun goToDetalhes(pokemon: PokemonItem){
+        val direcao = ListaPokemonsFragmentDirections
+            .actionListaPokemonsToDetalhesPokemons(pokemon.id)
+        controlador.navigate(direcao)
     }
 }

@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_nome_pokemon_detalhes" />
 
     <TextView
-        android:id="@+id/tv_hp_pokemon_detalhes"
+        android:id="@+id/tv_pokemon_detalhes_habilidades"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -57,25 +57,12 @@
         android:layout_marginEnd="310dp"
         android:layout_marginRight="310dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tipo_pokemon_detalhes"
-        tools:text="HP pokemon" />
-
-    <TextView
-        android:id="@+id/tv_evolucoes_pokemon_detalhes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="265dp"
-        android:layout_marginRight="265dp"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_hp_pokemon_detalhes"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tipo_pokemon_detalhes"
         app:layout_constraintVertical_bias="0.0"
-        tools:text="Evoluções pokemon" />
+        tools:text="Detalhes pokemon" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
