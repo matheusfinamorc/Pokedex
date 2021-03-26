@@ -4,15 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.pokedex.R
 import com.example.pokedex.model.PokemonAbility
-import com.example.pokedex.model.PokemonData
 import com.example.pokedex.model.PokemonItem
-import kotlinx.android.synthetic.main.detalhes_pokemon.view.*
 import kotlinx.android.synthetic.main.item_pokemon.view.*
 
 class PokemonAdapter(
@@ -65,16 +62,12 @@ class PokemonAdapter(
             this.pokemon = pokemonItem
             campoNome.text = pokemonItem.nome
             campoType.text = pokemonItem.types.toString()
-           // campoAbilityNome.text = pokemonItem.abilities.toString()
-
 
             //  Log.i("Response", pokemons[0].types.toString())
             Glide.with(itemView)
-                .load("https://images.pokemontcg.io/"+pokemonItem.id+".png")
+                .load(pokemonItem.smallImageUrl)
                 .transform(CenterCrop())
                 .into(campoImagem)
-
-
         }
 
     }

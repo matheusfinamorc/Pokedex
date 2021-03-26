@@ -14,4 +14,3 @@ import com.google.gson.annotations.SerializedName
   class PokemonImage(
     @SerializedName("small") val smallImageUrl: String
 )
-

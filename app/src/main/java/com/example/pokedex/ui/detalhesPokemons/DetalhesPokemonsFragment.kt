@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.pokedex.R
+import com.example.pokedex.model.PokemonAbility
 import com.example.pokedex.repository.PokedexRepository
 import kotlinx.android.synthetic.main.detalhes_pokemon.*
 
@@ -50,13 +51,11 @@ class DetalhesPokemonsFragment: Fragment() {
 
     private fun configDetalhes() {
         Toast.makeText(activity, pokemon.nome, Toast.LENGTH_LONG).show()
-
        detalhesViewModel.getDetalhes(pokemon.id)
         detalhesViewModel.mResponse.observe(viewLifecycleOwner, {
             if(it.isSuccessful){
                 tv_detalhes_nome_pokemon.text = pokemon.nome
-              //  tv_detalhes_habilidades_pokemon.text = pokemon.abilities.toString()
-
+                tv_detalhes_habilidades_pokemon.text = it.body()?.abilities.toString()
             }
         })
     }

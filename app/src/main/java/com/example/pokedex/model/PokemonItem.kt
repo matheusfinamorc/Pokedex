@@ -10,7 +10,7 @@ data class PokemonItem(
     @PrimaryKey(autoGenerate = false)
     val id: String,
     @SerializedName("name") val nome: String,
-    //val smallImageUrl: List<String>
+    val smallImageUrl: List<PokemonImage>,
     val types: List<String>,
     val abilities: List<PokemonAbility>
 
