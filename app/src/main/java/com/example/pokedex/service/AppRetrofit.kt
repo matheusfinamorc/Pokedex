@@ -4,7 +4,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val BASE_URL = "https://api.pokemontcg.io/"
+private const val BASE_URL =  "https://api.pokemontcg.io/"
 
 class AppRetrofit {
     val client = OkHttpClient.Builder()

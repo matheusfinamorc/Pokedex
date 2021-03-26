@@ -4,27 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import com.example.pokedex.MyApplication
 import com.example.pokedex.R
+import com.example.pokedex.repository.PokedexRepository
 import kotlinx.android.synthetic.main.detalhes_pokemon.*
-import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class DetalhesPokemonsFragment: Fragment() {
     private val argumentos by navArgs<DetalhesPokemonsFragmentArgs>()
+    private lateinit var detalhesViewModel: DetalhesPokemonsViewModel
 
-    private val pokemonId by lazy { argumentos.pokemonId }
+    private val pokemon by lazy { argumentos.pokemon }
 
-    private val viewModel: DetalhesPokemonsViewModel by viewModels{
-        DetalhesPokemonsViewModelFactory(
-        (activity?.application
-                    as MyApplication).repository
-        )
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val repository = PokedexRepository()
+        val viewModelFactory = DetalhesPokemonsViewModelFactory(repository)
+
+        detalhesViewModel = ViewModelProvider(
+            this,
+            viewModelFactory)
+            .get(DetalhesPokemonsViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -37,6 +40,7 @@ class DetalhesPokemonsFragment: Fragment() {
             container,
             false
         )
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,10 +49,14 @@ class DetalhesPokemonsFragment: Fragment() {
     }
 
     private fun configDetalhes() {
-        viewModel.getDetalhes(pokemonId)
-        viewModel.mResponse.observe(viewLifecycleOwner,{
+        Toast.makeText(activity, pokemon.nome, Toast.LENGTH_LONG).show()
+
+       detalhesViewModel.getDetalhes(pokemon.id)
+        detalhesViewModel.mResponse.observe(viewLifecycleOwner, {
             if(it.isSuccessful){
-                tv_nome_pokemon_detalhes.text = it.body()?.nome
+                tv_detalhes_nome_pokemon.text = pokemon.nome
+              //  tv_detalhes_habilidades_pokemon.text = pokemon.abilities.toString()
+
             }
         })
     }

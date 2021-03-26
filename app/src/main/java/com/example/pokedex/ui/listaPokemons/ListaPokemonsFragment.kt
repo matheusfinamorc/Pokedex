@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout.VERTICAL
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,13 +16,14 @@ import com.example.pokedex.MyApplication
 import com.example.pokedex.R
 import com.example.pokedex.adapter.PokemonAdapter
 import com.example.pokedex.model.PokemonItem
+import com.example.pokedex.repository.PokedexRepository
+import com.example.pokedex.ui.detalhesPokemons.DetalhesPokemonsViewModel
+import com.example.pokedex.ui.detalhesPokemons.DetalhesPokemonsViewModelFactory
 import kotlinx.android.synthetic.main.lista_pokemons.*
 
 class ListaPokemonsFragment: Fragment() {
 
-    private val viewModel: PokemonViewModel by viewModels{
-        ListaPokemonsViewModelFactory((activity?.application as MyApplication).repository)
-    }
+    private lateinit var listaViewModel: PokemonViewModel
 
     private val controlador by lazy {
         findNavController()
@@ -34,7 +36,16 @@ class ListaPokemonsFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getPokemons()
+
+        val repository = PokedexRepository()
+        val viewModelFactory = ListaPokemonsViewModelFactory(repository)
+
+        listaViewModel = ViewModelProvider(
+            this,
+            viewModelFactory)
+            .get(PokemonViewModel::class.java)
+            getPokemons()
+
     }
 
 
@@ -59,8 +70,8 @@ class ListaPokemonsFragment: Fragment() {
 
     // chama os pokemons para a lista
     private fun getPokemons() {
-        viewModel.getPokemons()
-        viewModel.mResponse.observe(this, { resposta ->
+        listaViewModel.getPokemons()
+        listaViewModel.mResponse.observe(this, { resposta ->
             if (resposta.isSuccessful) {
                 resposta.body()?.let { pokemons ->
                     adapter?.add(pokemons.pokemons)
@@ -93,7 +104,7 @@ class ListaPokemonsFragment: Fragment() {
     // acao de ir para os detalhes do pokemon clicado
     private fun goToDetalhes(pokemon: PokemonItem){
         val direcao = ListaPokemonsFragmentDirections
-            .actionListaPokemonsToDetalhesPokemons(pokemon.id)
+            .actionListaPokemonsToDetalhesPokemons(pokemon)
         controlador.navigate(direcao)
     }
 }

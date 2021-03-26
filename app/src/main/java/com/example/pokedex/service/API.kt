@@ -10,7 +10,7 @@ interface API {
     @GET("v2/cards")
     suspend fun getPokemon(): Response<PokemonsResponse>
 
-    @GET("v2/sets?q=legalities.standard:legal/{id}/")
+    @GET("v2/cards/{id}/")
     suspend fun getDetalhes(@Path("id") id: String): Response<PokemonItem>
 
 }

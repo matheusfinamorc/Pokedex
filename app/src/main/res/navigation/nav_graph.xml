@@ -40,8 +40,8 @@
         android:name="com.example.pokedex.ui.detalhesPokemons.DetalhesPokemonsFragment"
         android:label="Detalhes Pokemons" >
         <argument
-            android:name="pokemonId"
-            app:argType="string" />
+            android:name="pokemon"
+            app:argType="com.example.pokedex.model.PokemonItem" />
     </fragment>
 
 </navigation>
