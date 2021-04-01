@@ -1,6 +1,7 @@
 package com.example.pokedex.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,15 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.pokedex.R
-import com.example.pokedex.model.PokemonAbility
+import com.example.pokedex.model.PokemonData
 import com.example.pokedex.model.PokemonItem
 import kotlinx.android.synthetic.main.item_pokemon.view.*
 
 class PokemonAdapter(
     private val context: Context,
     private val pokemons: MutableList<PokemonItem> = mutableListOf(),
-    var onItemClickListener: (pokemon: PokemonItem) -> Unit = {}
+    var onItemClickListener: (pokemon: PokemonItem) -> Unit = {},
+    var onItemSave: (pokemon: PokemonItem) -> Unit = {}
+
 ) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonAdapter.ViewHolder {
         val viewCriada = LayoutInflater.from(context).inflate(
@@ -47,28 +51,33 @@ class PokemonAdapter(
         private val campoNome by lazy { itemView.item_pokemon_nome }
         private val campoType by lazy { itemView.item_pokemon_tipo }
         private val campoImagem by lazy { itemView.pokemon_imagem_card }
-       // private val campoAbilityNome by lazy { itemView.tv_detalhes_habilidades_pokemon }
+        private val botaoFav by lazy { itemView.botao_favoritar }
 
         init {
             itemView.setOnClickListener {
-                if(::pokemon.isInitialized){
+                if (::pokemon.isInitialized) {
                     onItemClickListener(pokemon)
                 }
             }
         }
-
+        init {
+            botaoFav.setOnClickListener {
+                if(::pokemon.isInitialized){
+                    onItemSave(pokemon)
+                }
+            }
+        }
 
         fun vincula(pokemonItem: PokemonItem) {
             this.pokemon = pokemonItem
             campoNome.text = pokemonItem.nome
             campoType.text = pokemonItem.types.toString()
+            // Log.i("Response", pokemons[0].abilities[0].name)
 
-            //  Log.i("Response", pokemons[0].types.toString())
             Glide.with(itemView)
-                .load(pokemonItem.smallImageUrl)
-                .transform(CenterCrop())
-                .into(campoImagem)
+                 .load(pokemonItem.images.smallImageUrl)
+                 .transform(CenterCrop())
+                 .into(campoImagem)
         }
-
     }
 }

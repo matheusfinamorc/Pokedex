@@ -6,56 +6,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="4dp"
+    <ImageView
+        android:id="@+id/id_imagem_pokemon_detalhes"
+        android:layout_width="125dp"
+        android:layout_height="186dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteY="129dp"
+        tools:srcCompat="@tools:sample/avatars" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_detalhes_nome_pokemon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:layout_marginLeft="148dp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="129dp"
+        tools:text="Nome Pokemon" />
 
-            <ImageView
-                android:id="@+id/id_imagem_pokemon_detalhes"
-                android:layout_width="166dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="68dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.065"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+    <TextView
+        android:id="@+id/tv_detalhes_habilidades_pokemon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/id_imagem_pokemon_detalhes"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hp_detalhes_pokemon"
+        tools:text="Habilidades do Pokemon" />
 
-            <TextView
-                android:id="@+id/tv_detalhes_nome_pokemon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginBottom="4dp"
-                app:layout_constraintBottom_toTopOf="@+id/id_imagem_pokemon_detalhes"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="Nome Pokemon" />
-
-            <TextView
-                android:id="@+id/tv_detalhes_habilidades_pokemon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="13dp"
-                app:layout_constraintStart_toEndOf="@+id/id_imagem_pokemon_detalhes"
-                app:layout_constraintTop_toBottomOf="@+id/tv_detalhes_nome_pokemon"
-                tools:text="Habilidades do Pokemon" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.cardview.widget.CardView>
-
-
+    <TextView
+        android:id="@+id/tv_hp_detalhes_pokemon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/id_imagem_pokemon_detalhes"
+        app:layout_constraintTop_toBottomOf="@+id/tv_detalhes_nome_pokemon"
+        tools:text="HP do Pokemon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

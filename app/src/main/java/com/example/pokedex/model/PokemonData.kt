@@ -1,16 +1,22 @@
 package com.example.pokedex.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
- class PokemonData(
+
+data class PokemonData(
     val data: List<PokemonItem>
 )
 
-  class PokemonAbility(
-    val name: String,
-    val text: String
+data class PokemonAbilities(
+    var ability: List<PokemonAbility>
 )
+data class PokemonAbility(
+    var name: String,
+    var text: String,
+    var type: String
+): Serializable
 
-  class PokemonImage(
+ data class PokemonImage(
     @SerializedName("small") val smallImageUrl: String
 )

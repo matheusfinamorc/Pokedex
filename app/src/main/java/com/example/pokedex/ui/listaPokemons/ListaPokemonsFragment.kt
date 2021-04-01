@@ -15,15 +15,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.MyApplication
 import com.example.pokedex.R
 import com.example.pokedex.adapter.PokemonAdapter
+import com.example.pokedex.dao.PokemonDAO
 import com.example.pokedex.model.PokemonItem
 import com.example.pokedex.repository.PokedexRepository
-import com.example.pokedex.ui.detalhesPokemons.DetalhesPokemonsViewModel
-import com.example.pokedex.ui.detalhesPokemons.DetalhesPokemonsViewModelFactory
 import kotlinx.android.synthetic.main.lista_pokemons.*
 
 class ListaPokemonsFragment: Fragment() {
 
-    private lateinit var listaViewModel: PokemonViewModel
+    private val listaViewModel: PokemonViewModel by viewModels{
+        ListaPokemonsViewModelFactory((activity?.application as MyApplication).repository)
+    }
 
     private val controlador by lazy {
         findNavController()
@@ -36,14 +37,6 @@ class ListaPokemonsFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val repository = PokedexRepository()
-        val viewModelFactory = ListaPokemonsViewModelFactory(repository)
-
-        listaViewModel = ViewModelProvider(
-            this,
-            viewModelFactory)
-            .get(PokemonViewModel::class.java)
             getPokemons()
 
     }
@@ -68,6 +61,7 @@ class ListaPokemonsFragment: Fragment() {
 
     }
 
+
     // chama os pokemons para a lista
     private fun getPokemons() {
         listaViewModel.getPokemons()
@@ -75,7 +69,7 @@ class ListaPokemonsFragment: Fragment() {
             if (resposta.isSuccessful) {
                 resposta.body()?.let { pokemons ->
                     adapter?.add(pokemons.pokemons)
-                    //Log.i("Response", pokemons.pokemons[0].nome)
+                    Log.i("Response", pokemons.pokemons[0].nome)
                 }
             } else {
                 Log.i("Response", resposta.errorBody().toString())
@@ -83,6 +77,10 @@ class ListaPokemonsFragment: Fragment() {
             }
         })
     }
+    private fun savePokemon(pokemon: PokemonItem){
+        listaViewModel.save(pokemon)
+    }
+
 
     // configura a lista e manda para o detalhe do item clicado
     private fun configuraLista(){
@@ -91,9 +89,11 @@ class ListaPokemonsFragment: Fragment() {
         }
         lista_pokemons_recyclerView.adapter = adapter
         lista_pokemons_recyclerView.layoutManager = LinearLayoutManager(context)
+        // botao de favoritar junto com acao de salvar para fav
+        adapter?.onItemSave = {
+            savePokemon(it)
+        }
     }
-
-
 
     private fun configuraRecyclerView() {
         val divisor = DividerItemDecoration(context, VERTICAL)
@@ -107,4 +107,5 @@ class ListaPokemonsFragment: Fragment() {
             .actionListaPokemonsToDetalhesPokemons(pokemon)
         controlador.navigate(direcao)
     }
+
 }

@@ -32,6 +32,13 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_listaPokemons_to_listaFavPokemonsFragment"
+            app:destination="@id/listaFavPokemons"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <fragment
@@ -42,6 +49,15 @@
         <argument
             android:name="pokemon"
             app:argType="com.example.pokedex.model.PokemonItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/listaFavPokemons"
+        tools:layout="@layout/lista_fav_pokemons"
+        android:name="com.example.pokedex.ui.listaFavPokemons.ListaFavPokemonsFragment"
+        android:label="ListaFavPokemonsFragment">
+        <argument
+            android:name="pokemon"
+            app:argType="com.example.pokedex.model.PokemonItem"/>
     </fragment>
 
 </navigation>
