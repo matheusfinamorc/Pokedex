@@ -2,11 +2,11 @@ package com.example.pokedex
 
 import androidx.room.TypeConverter
 import com.example.pokedex.model.PokemonAbility
-import com.example.pokedex.model.PokemonImage
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class Converters {
+    // Conversor PokemonAbility
     @TypeConverter
     fun fromAbilityPokemonList(value: List<PokemonAbility>): String {
         val gson = Gson()
@@ -21,6 +21,7 @@ class Converters {
         return gson.fromJson(value, type)
     }
 
+    // Conversor Type Pokemon
     @TypeConverter
     fun fromTypePokemonList(value: List<String>): String {
         val gson = Gson()
@@ -35,15 +36,16 @@ class Converters {
         return gson.fromJson(value, type)
     }
 
-    @TypeConverter
-    fun fromImagePokemon(value: PokemonImage): String{
-        val gson = Gson()
-        val type = object : TypeToken<PokemonImage>() {}.type
-        return gson.toJson(value,type)
-    }
-    fun toImagePokemon(value: String): PokemonImage{
-        val gson = Gson()
-        val type = object : TypeToken<PokemonImage>() {}.type
-        return gson.fromJson(value,type)
-    }
+//    @TypeConverter
+//    fun fromImagePokemon(value: PokemonImage): String{
+//        val gson = Gson()
+//        val type = object : TypeToken<PokemonImage>() {}.type
+//        return gson.toJson(value,type)
+//    }
+//    fun toImagePokemon(value: String): PokemonImage{
+//        val gson = Gson()
+//        val type = object : TypeToken<PokemonImage>() {}.type
+//        return gson.fromJson(value,type)
+//    }
 }
+

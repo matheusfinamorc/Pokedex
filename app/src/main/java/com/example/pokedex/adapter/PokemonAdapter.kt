@@ -50,7 +50,7 @@ class PokemonAdapter(
         private lateinit var pokemon: PokemonItem
         private val campoNome by lazy { itemView.item_pokemon_nome }
         private val campoType by lazy { itemView.item_pokemon_tipo }
-        private val campoImagem by lazy { itemView.pokemon_imagem_card }
+        // private val campoImagem by lazy { itemView.pokemon_imagem_card }
         private val botaoFav by lazy { itemView.botao_favoritar }
 
         init {
@@ -74,10 +74,11 @@ class PokemonAdapter(
             campoType.text = pokemonItem.types.toString()
             // Log.i("Response", pokemons[0].abilities[0].name)
 
-            Glide.with(itemView)
-                 .load(pokemonItem.images.smallImageUrl)
-                 .transform(CenterCrop())
-                 .into(campoImagem)
+//            Glide.with(itemView)
+//                 .load(pokemonItem.images.smallImageUrl)
+//                 .transform(CenterCrop())
+//                 .into(campoImagem)
         }
     }
 }
+

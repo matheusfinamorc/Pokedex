@@ -1,6 +1,5 @@
 package com.example.pokedex.model
 
-import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 
@@ -17,6 +16,6 @@ data class PokemonAbility(
     var type: String
 ): Serializable
 
- data class PokemonImage(
-    @SerializedName("small") val smallImageUrl: String
-)
+// data class PokemonImage(
+//    @SerializedName("small") val smallImageUrl: String
+//)
