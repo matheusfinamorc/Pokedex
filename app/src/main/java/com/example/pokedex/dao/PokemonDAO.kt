@@ -2,6 +2,7 @@ package com.example.pokedex.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
@@ -18,6 +19,9 @@ interface PokemonDAO {
 
     @Insert(onConflict = REPLACE)
     suspend fun saveListaCompleta(pokemon: PokemonItem)
+
+    @Delete
+    suspend fun deleteFav(pokemon: PokemonItem)
 
 
 }

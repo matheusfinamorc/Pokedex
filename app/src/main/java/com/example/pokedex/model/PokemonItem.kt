@@ -9,14 +9,15 @@ import java.io.Serializable
 
 @Entity(tableName = "PokemonItem")
 @TypeConverters(Converters::class)
+
 data class PokemonItem(
     @PrimaryKey(autoGenerate = false)
-    val id: String,
-    @SerializedName("name") val nome: String,
+    val id: String = "",
+    @SerializedName("name") val nome: String = "",
   //  val images: PokemonImage,
     val types: List<String>,
     val abilities: List<PokemonAbility>,
-    val hp: String
+    val hp: String = ""
 
 ) :Serializable
 

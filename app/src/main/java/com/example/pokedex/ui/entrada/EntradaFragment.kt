@@ -18,8 +18,6 @@ class EntradaFragment : Fragment() {
     private val controlador by lazy {
         findNavController()
     }
-    private val viewModel: EntradaViewModel by viewModel()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

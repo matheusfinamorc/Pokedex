@@ -1,21 +1,18 @@
 package com.example.pokedex.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.pokedex.R
-import com.example.pokedex.model.PokemonData
 import com.example.pokedex.model.PokemonItem
 import kotlinx.android.synthetic.main.item_pokemon.view.*
 
 class PokemonAdapter(
     private val context: Context,
-    private val pokemons: MutableList<PokemonItem> = mutableListOf(),
+    private var pokemons: MutableList<PokemonItem> = mutableListOf(),
+    var pokemonsFilter: MutableList<PokemonItem> = mutableListOf(),
     var onItemClickListener: (pokemon: PokemonItem) -> Unit = {},
     var onItemSave: (pokemon: PokemonItem) -> Unit = {}
 
@@ -50,7 +47,8 @@ class PokemonAdapter(
         private lateinit var pokemon: PokemonItem
         private val campoNome by lazy { itemView.item_pokemon_nome }
         private val campoType by lazy { itemView.item_pokemon_tipo }
-        // private val campoImagem by lazy { itemView.pokemon_imagem_card }
+
+        //  private val campoImagem by lazy { itemView.pokemon_imagem_card }
         private val botaoFav by lazy { itemView.botao_favoritar }
 
         init {
@@ -60,9 +58,10 @@ class PokemonAdapter(
                 }
             }
         }
+
         init {
             botaoFav.setOnClickListener {
-                if(::pokemon.isInitialized){
+                if (::pokemon.isInitialized) {
                     onItemSave(pokemon)
                 }
             }
@@ -72,7 +71,6 @@ class PokemonAdapter(
             this.pokemon = pokemonItem
             campoNome.text = pokemonItem.nome
             campoType.text = pokemonItem.types.toString()
-            // Log.i("Response", pokemons[0].abilities[0].name)
 
 //            Glide.with(itemView)
 //                 .load(pokemonItem.images.smallImageUrl)
@@ -80,5 +78,5 @@ class PokemonAdapter(
 //                 .into(campoImagem)
         }
     }
-}
 
+}

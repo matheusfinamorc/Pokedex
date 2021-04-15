@@ -26,4 +26,11 @@ class PokemonViewModel(
         }
     }
 
+    fun getSearch(name: String){
+        viewModelScope.launch {
+            val response = repository.getPokemonsPesquisa(name)
+            mResponse.value = response
+        }
+    }
+
 }
