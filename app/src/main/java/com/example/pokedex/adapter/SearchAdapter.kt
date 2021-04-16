@@ -7,19 +7,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.R
 import com.example.pokedex.model.PokemonItem
-import kotlinx.android.synthetic.main.item_fav_pokemon.view.*
+import kotlinx.android.synthetic.main.item_pokemon.view.*
 
-class PokemonFavAdapter(
+class SearchAdapter(
+
     private val context: Context,
-    private val pokemons: MutableList<PokemonItem> = mutableListOf(),
-    var onItemDelete: (pokemon: PokemonItem) -> Unit = {}
+    private var pokemons: MutableList<PokemonItem> = mutableListOf(),
+    var onItemClickListener: (pokemon: PokemonItem) -> Unit = {},
 
-) : RecyclerView.Adapter<PokemonFavAdapter.ViewHolder>() {
+):RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonFavAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchAdapter.ViewHolder {
         val viewCriada = LayoutInflater.from(context).inflate(
-            R.layout.item_fav_pokemon,
+            R.layout.search_item,
             parent,
             false
         )
@@ -32,26 +32,25 @@ class PokemonFavAdapter(
 
     override fun getItemCount() = pokemons.size
 
-    fun add(pokemons: List<PokemonItem>) {
+    fun addSearch(pokemons: List<PokemonItem>) {
         this.pokemons.clear()
         this.pokemons.addAll(pokemons)
         notifyDataSetChanged()
     }
 
-
     inner class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
         private lateinit var pokemon: PokemonItem
-        private val campoNome by lazy { itemView.item_pokemon_nome_fav }
-        private val campoType by lazy { itemView.item_pokemon_tipo_fav }
+        private val campoNome by lazy { itemView.item_pokemon_nome }
+        private val campoType by lazy { itemView.item_pokemon_tipo }
 
-        private val botaoDeleteFav by lazy { itemView.botao_deletar_fav}
+        //  private val campoImagem by lazy { itemView.pokemon_imagem_card }
 
         init {
-            botaoDeleteFav.setOnClickListener {
+            itemView.setOnClickListener {
                 if (::pokemon.isInitialized) {
-                    onItemDelete(pokemon)
+                    onItemClickListener(pokemon)
                 }
             }
         }
@@ -60,6 +59,11 @@ class PokemonFavAdapter(
             this.pokemon = pokemonItem
             campoNome.text = pokemonItem.nome
             campoType.text = pokemonItem.types.toString()
+
+//            Glide.with(itemView)
+//                 .load(pokemonItem.images.smallImageUrl)
+//                 .transform(CenterCrop())
+//                 .into(campoImagem)
         }
     }
 }

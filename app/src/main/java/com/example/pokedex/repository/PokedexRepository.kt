@@ -1,5 +1,6 @@
 package com.example.pokedex.repository
 
+import android.util.Log
 import com.example.pokedex.dao.PokemonDAO
 import com.example.pokedex.model.PokemonItem
 import com.example.pokedex.service.API
@@ -21,10 +22,10 @@ class PokedexRepository(
         return api.getDetalhes(id)
     }
 
+    // salva uma lista internamente de pokemons (favoritos)
     suspend fun saveListaCompleta(pokemon: PokemonItem){
-        dao.saveListaCompleta(pokemon)
+        dao.saveInterno(pokemon)
     }
-
     // pega todos os pokemons que estao salvos internamente
     fun todosInterno(): Flow<List<PokemonItem>> = dao.buscaCompleta()
 
@@ -34,10 +35,10 @@ class PokedexRepository(
     }
 
     suspend fun getPokemonsPesquisa(name: String): Response<PokemonsResponse>{
+        Log.i("RESPONSE", "PokedexRepository getPokemonsPesquisa:"+name)
         return api.getPokemonsPesquisa(name)
+
     }
-
-
 
 }
 

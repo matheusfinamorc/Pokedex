@@ -1,18 +1,19 @@
 package com.example.pokedex.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.R
 import com.example.pokedex.model.PokemonItem
+import com.example.pokedex.repository.PokemonsResponse
 import kotlinx.android.synthetic.main.item_pokemon.view.*
 
 class PokemonAdapter(
     private val context: Context,
     private var pokemons: MutableList<PokemonItem> = mutableListOf(),
-    var pokemonsFilter: MutableList<PokemonItem> = mutableListOf(),
     var onItemClickListener: (pokemon: PokemonItem) -> Unit = {},
     var onItemSave: (pokemon: PokemonItem) -> Unit = {}
 
@@ -39,7 +40,12 @@ class PokemonAdapter(
         this.pokemons.addAll(pokemons)
         notifyDataSetChanged()
     }
-
+//    fun addSearch(pokemons: List<PokemonItem>) {
+//        this.pokemons.clear()
+//        this.pokemons.addAll(pokemons)
+//        notifyDataSetChanged()
+//        Log.i("RESPONSE", "addSearch: "+pokemons)
+//    }
 
     inner class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
@@ -79,4 +85,40 @@ class PokemonAdapter(
         }
     }
 
+
+//    override fun getFilter(): Filter {
+//        return object: Filter(){
+//            override fun performFiltering(charsequence: CharSequence?): FilterResults {
+//
+//                val filterResults = FilterResults()
+//                if(charsequence == null || charsequence.length < 0){
+//                    filterResults.count = pokemonsFilter.size
+//                    filterResults.values = pokemonsFilter
+//                }else{
+//                    var searchCh = charsequence.toString().toLowerCase()
+//
+//                    val pokemon = ArrayList<PokemonItem>()
+//
+//                    for (item in pokemonsFilter){
+//                        if(item.nome.contains(searchCh)){
+//                            pokemon.add(item)
+//                        }
+//                    }
+//                    filterResults.count = pokemon.size
+//                    filterResults.values = pokemon
+//                }
+//
+//                return filterResults
+//
+//            }
+//
+//            override fun publishResults(constraint: CharSequence?, filterResults: FilterResults?) {
+//
+//                pokemons = filterResults!!.values as MutableList<PokemonItem>
+//                notifyDataSetChanged()
+//
+//            }
+//
+//        }
+//    }
 }

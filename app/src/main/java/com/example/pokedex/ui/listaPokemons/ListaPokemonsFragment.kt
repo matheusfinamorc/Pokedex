@@ -111,57 +111,58 @@ class ListaPokemonsFragment() : Fragment() {
     }
 
 
-    // criação da barra de pesquisa na lista de pokemons
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        Log.i("RESPONSE", "Entrou no onCreateOptionsMenu: ")
-
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.search_menu, menu)
-        val searchManager = activity?.getSystemService(SEARCH_SERVICE) as SearchManager
-        val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
-        val searchMenuItem = menu.findItem(R.id.action_search)
-
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
-        searchView.queryHint = "Pesquisar"
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                searchView.clearFocus()
-//                Toast.makeText(activity, "Carregando $filterString", Toast.LENGTH_LONG).show()
-                if(query?.length!! >= 5) {
-                    listaViewModel.getSearch(query)
-                    listaViewModel.mResponse.observe(this@ListaPokemonsFragment, {
-                        if (it.isSuccessful) {
-                            it.body()?.let { resultado ->
-                                adapter?.add(resultado.pokemons)
-                                Log.i("RESPONSE", "onQueryTextSubmit:"+ resultado.pokemons)
-                            }
-                        }
-                    })
-                }
-                Log.i("RESPONSE", "ListaPokemonsFragment onQueryTextSubmit:")
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                if(newText?.length!! >= 5) {
-                    listaViewModel.getSearch(newText)
-                    listaViewModel.mResponse.observe(this@ListaPokemonsFragment, {
-                        if (it.isSuccessful) {
-                            it.body()?.let { resultado ->
-                                adapter?.add(resultado.pokemons)
-                            }
-                        }
-                    })
-                }
-                Log.i("RESPONSE", "ListaPokemonsFragment onQueryTextChange: ")
-                return true
-            }
-
-        })
-        searchMenuItem.icon.setVisible(false, false)
-    }
+//    // criação da barra de pesquisa na lista de pokemons
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        Log.i("RESPONSE", "Entrou no onCreateOptionsMenu: ")
+//
+//        super.onCreateOptionsMenu(menu, inflater)
+//        inflater.inflate(R.menu.search_menu, menu)
+//        val searchManager = activity?.getSystemService(SEARCH_SERVICE) as SearchManager
+//        val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
+//        val searchMenuItem = menu.findItem(R.id.action_search)
+//
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+//        searchView.queryHint = "Pesquisar"
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                searchView.clearFocus()
+//
+//                search(query)
+//                Log.i("RESPONSE", "ListaPokemonsFragment onQueryTextSubmit: "+query)
+//
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(newText: String): Boolean {
+//                search(newText)
+//
+//                Log.i("RESPONSE", "ListaPokemonsFragment onQueryTextChange: ")
+//
+//                return true
+//            }
+//
+//        })
+//        searchMenuItem.icon.setVisible(false, false)
+//    }
+//
+//    private fun search(query: String?) {
+//        if (query?.length!! >= 1) {
+//            listaViewModel.getSearch(query)
+//            listaViewModel.mResponse.observe(this@ListaPokemonsFragment, {
+//                Log.i("RESPONSE", "onQueryTextSubmit: ENTROU NO OBSERVER 1")
+//                if (it.isSuccessful) {
+//                    Log.i("RESPONSE", "onQueryTextSubmit: ENTRO NO isSucceful 2")
+//                    it.body()?.let { resultado ->
+//                        Log.i(
+//                            "RESPONSE",
+//                            "onQueryTextSubmit: ENTROU NO ADDAPTER PARA ADICIONAR O POKEMON"
+//                        )
+//                        adapter?.addSearch(resultado.pokemons)
+//                    }
+//                }
+//            })
+//        }
+//    }
 
 
 }
-
-

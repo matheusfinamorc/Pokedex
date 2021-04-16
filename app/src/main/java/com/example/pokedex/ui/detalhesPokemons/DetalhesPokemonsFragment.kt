@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -50,10 +51,10 @@ class DetalhesPokemonsFragment: Fragment() {
                 tv_detalhes_nome_pokemon.text = pokemon.nome
                 tv_detalhes_habilidades_pokemon.text = pokemon.abilities[0].name
                 tv_hp_detalhes_pokemon.text = pokemon.hp
-            //    Glide.with(requireContext())
-            //        .load(pokemon.images.smallImageUrl)
-            //        .transform(CenterCrop())
-            //        .into(id_imagem_pokemon_detalhes)
+//                Glide.with(requireContext())
+//                    .load(pokemon.images.smallImageUrl)
+//                    .transform(CenterCrop())
+//                    .into(id_imagem_pokemon_detalhes)
             }
         })
     }

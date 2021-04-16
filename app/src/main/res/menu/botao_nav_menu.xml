@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:checkableBehavior="single">
         <item
@@ -7,8 +8,14 @@
             android:icon="@drawable/ic_acao_home"
             android:title="Home" />
         <item
-            android:id="@+id/lista_fav"
+            android:id="@+id/listaFavPokemons"
             android:icon="@drawable/ic_acao_pokebola"
             android:title="Favoritos" />
+
+        <item
+            android:id="@+id/search"
+            app:showAsAction="ifRoom|withText"
+            android:icon="@drawable/ic_search"
+            android:title="Buscar"/>
     </group>
 </menu>

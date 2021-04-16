@@ -21,7 +21,7 @@ class PokemonMigrations {
                 database.execSQL(
                     "INSERT INTO Pokemon_Novo (" +
                             "id, nome, types, abilities, hp)" +
-                            "SELECT id, nome, types, abilities, hp FROM PokemonItem"
+                     "SELECT id, nome, types, abilities, hp FROM PokemonItem"
                 )
                 database.execSQL("DROP TABLE PokemonItem")
                 database.execSQL("ALTER TABLE Pokemon_Novo RENAME TO PokemonItem")
@@ -32,5 +32,3 @@ class PokemonMigrations {
 
     }
 }
-
-

@@ -8,10 +8,10 @@ import com.google.gson.reflect.TypeToken
 class Converters {
     // Conversor PokemonAbility
     @TypeConverter
-    fun fromAbilityPokemonList(value: List<PokemonAbility>): String {
+    fun fromAbilityPokemonList(value: List<PokemonAbility>?): String {
         val gson = Gson()
         val type = object : TypeToken<List<PokemonAbility>>() {}.type
-        return gson.toJson(value, type)
+        return gson.toJson(value ?: ArrayList<PokemonAbility>(), type)
     }
 
     @TypeConverter
@@ -36,16 +36,4 @@ class Converters {
         return gson.fromJson(value, type)
     }
 
-//    @TypeConverter
-//    fun fromImagePokemon(value: PokemonImage): String{
-//        val gson = Gson()
-//        val type = object : TypeToken<PokemonImage>() {}.type
-//        return gson.toJson(value,type)
-//    }
-//    fun toImagePokemon(value: String): PokemonImage{
-//        val gson = Gson()
-//        val type = object : TypeToken<PokemonImage>() {}.type
-//        return gson.fromJson(value,type)
-//    }
 }
-

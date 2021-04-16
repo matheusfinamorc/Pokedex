@@ -6,7 +6,6 @@ import java.io.Serializable
 data class PokemonData(
     val data: List<PokemonItem>
 )
-
 data class PokemonAbilities(
     var ability: List<PokemonAbility>
 )

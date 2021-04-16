@@ -14,6 +14,6 @@ interface API {
     @GET("v2/cards/{id}/")
     suspend fun getDetalhes(@Path("id") id: String): Response<PokemonItem>
 
-    @GET("v2/cards")
+    @GET("v2/cards?q=name:")
     suspend fun getPokemonsPesquisa(@Query("q") name: String): Response<PokemonsResponse>
 }
