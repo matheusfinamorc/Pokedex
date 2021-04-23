@@ -1,24 +1,43 @@
 package com.example.pokedex.ui.listaPokemons
 
-import android.app.SearchManager
-import android.content.Context.SEARCH_SERVICE
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout.VERTICAL
-import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.MyApplication
 import com.example.pokedex.R
 import com.example.pokedex.adapter.PokemonAdapter
 import com.example.pokedex.model.PokemonItem
+import com.example.pokedex.ui.main.MainActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.imageview.ShapeableImageView
 import kotlinx.android.synthetic.main.lista_pokemons.*
+import kotlinx.android.synthetic.main.main_activity.*
+import java.io.File
+import java.io.FileInputStream
 
 class ListaPokemonsFragment() : Fragment() {
 
@@ -62,8 +81,9 @@ class ListaPokemonsFragment() : Fragment() {
 
     }
 
+
     // chama os pokemons para a lista
-    private fun getPokemons() {
+    fun getPokemons() {
         listaViewModel.getPokemons()
         listaViewModel.mResponse.observe(this, { resposta ->
             if (resposta.isSuccessful) {
@@ -109,60 +129,6 @@ class ListaPokemonsFragment() : Fragment() {
             .actionListaPokemonsToDetalhesPokemons(pokemon)
         controlador.navigate(direcao)
     }
-
-
-//    // criação da barra de pesquisa na lista de pokemons
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        Log.i("RESPONSE", "Entrou no onCreateOptionsMenu: ")
-//
-//        super.onCreateOptionsMenu(menu, inflater)
-//        inflater.inflate(R.menu.search_menu, menu)
-//        val searchManager = activity?.getSystemService(SEARCH_SERVICE) as SearchManager
-//        val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
-//        val searchMenuItem = menu.findItem(R.id.action_search)
-//
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
-//        searchView.queryHint = "Pesquisar"
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                searchView.clearFocus()
-//
-//                search(query)
-//                Log.i("RESPONSE", "ListaPokemonsFragment onQueryTextSubmit: "+query)
-//
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(newText: String): Boolean {
-//                search(newText)
-//
-//                Log.i("RESPONSE", "ListaPokemonsFragment onQueryTextChange: ")
-//
-//                return true
-//            }
-//
-//        })
-//        searchMenuItem.icon.setVisible(false, false)
-//    }
-//
-//    private fun search(query: String?) {
-//        if (query?.length!! >= 1) {
-//            listaViewModel.getSearch(query)
-//            listaViewModel.mResponse.observe(this@ListaPokemonsFragment, {
-//                Log.i("RESPONSE", "onQueryTextSubmit: ENTROU NO OBSERVER 1")
-//                if (it.isSuccessful) {
-//                    Log.i("RESPONSE", "onQueryTextSubmit: ENTRO NO isSucceful 2")
-//                    it.body()?.let { resultado ->
-//                        Log.i(
-//                            "RESPONSE",
-//                            "onQueryTextSubmit: ENTROU NO ADDAPTER PARA ADICIONAR O POKEMON"
-//                        )
-//                        adapter?.addSearch(resultado.pokemons)
-//                    }
-//                }
-//            })
-//        }
-//    }
 
 
 }

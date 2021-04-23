@@ -16,6 +16,7 @@ class PokemonViewModel(
     val mResponse: MutableLiveData<Response<PokemonsResponse>> = MutableLiveData()
     val fPesquisaResponse: MutableLiveData<Resource<PokemonsResponse>> = MutableLiveData()
     var fPesquisaResponseNew:PokemonsResponse? = null
+    var pokedexPage = 1
 
 
     fun getPokemons(){
@@ -41,7 +42,7 @@ class PokemonViewModel(
 }
 
     private suspend fun searchPokemons(searchQuery: String){
-        val response = repository.getPokemonsPesquisa(searchQuery)
+        val response = repository.getPokemonsPesquisa(searchQuery, pokedexPage)
         fPesquisaResponse.postValue(searchPokemonResponse(response))
     }
 

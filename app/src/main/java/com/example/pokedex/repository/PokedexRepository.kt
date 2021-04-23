@@ -34,9 +34,8 @@ class PokedexRepository(
         dao.deleteFav(pokemon)
     }
 
-    suspend fun getPokemonsPesquisa(name: String): Response<PokemonsResponse>{
-        Log.i("RESPONSE", "PokedexRepository getPokemonsPesquisa:"+name)
-        return api.getPokemonsPesquisa(name)
+    suspend fun getPokemonsPesquisa(name: String, pageNumber: Int): Response<PokemonsResponse>{
+        return api.getPokemonsPesquisa(name, pageNumber)
 
     }
 

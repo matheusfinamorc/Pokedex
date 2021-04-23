@@ -24,6 +24,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.security.auth.login.LoginException
 
 class SearchFragment: Fragment() {
 
@@ -74,12 +75,14 @@ class SearchFragment: Fragment() {
         viewModel.fPesquisaResponse.observe(viewLifecycleOwner, { response ->
             when(response){
                 is Resource.Success<*> -> {
+                    Log.i("RESPONSE", "onViewCreated: RESPOSTA FOI UM SUCESSO"+response.data)
                     hideProgressBar()
-                    response.data?.let { pokemons ->
-                        pokemons.pokemons.let { it1 -> adapter?.addSearch(it1) }
+                    response.data?.let { pokemon ->
+                        pokemon.pokemons.let { it1 -> adapter?.addSearch(it1) }
                     }
                 }
                 is Resource.Error<*> -> {
+                    Log.i("RESPONSE", "onViewCreated: RESPOSTA FOI UM ERRO"+ response.data)
                     hideProgressBar()
                     response.message?.let { message ->
                         Toast.makeText(activity,"Erro: $message", Toast.LENGTH_SHORT).show()

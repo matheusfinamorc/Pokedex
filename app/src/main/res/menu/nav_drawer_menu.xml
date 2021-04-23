@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/drawer_Home"
+        android:title="Home"
+        android:icon="@drawable/ic_home"/>
+
     <item
         android:id="@+id/drawer_fav"
+        android:icon="@drawable/ic_acao_pokebola"
         android:title="Favoritos" />
     <item
         android:id="@+id/drawer_perfil"
+        android:icon="@drawable/ic_perfil"
         android:title="Perfil"/>
+
+    <item
+        android:id="@+id/drawer_camera"
+        android:title="Alterar foto do usuário"
+        android:icon="@drawable/ic_camera"/>
+
+    <item
+        android:id="@+id/drawer_maps"
+        android:title="Localização"
+        android:icon="@drawable/ic_localizacao"/>
 
 </menu>

@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
-
 }
 
 android {
@@ -47,6 +46,11 @@ android {
 
 dependencies {
     implementation 'androidx.drawerlayout:drawerlayout:1.0.0'
+
+    // Maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+
     def lifecycle_version = "2.3.0"
 
     def koin_version = "2.0.1"
@@ -97,5 +101,8 @@ dependencies {
 
     //Gson
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    //dependencia para deixar a imagem circular
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
 
 }

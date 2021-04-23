@@ -1,5 +1,6 @@
 package com.example.pokedex.service
 
+import com.example.pokedex.BuildConfig.API_KEY
 import com.example.pokedex.model.PokemonItem
 import com.example.pokedex.repository.PokemonsResponse
 import retrofit2.Response
@@ -14,6 +15,11 @@ interface API {
     @GET("v2/cards/{id}/")
     suspend fun getDetalhes(@Path("id") id: String): Response<PokemonItem>
 
-    @GET("v2/cards?q=name:")
-    suspend fun getPokemonsPesquisa(@Query("q") name: String): Response<PokemonsResponse>
+    @GET("v2/cards")
+    suspend fun getPokemonsPesquisa(
+        @Query("q=name:") name: String,
+        @Query("page") pageNumber: Int = 1,
+        @Query("apiKey") apiKey: String = API_KEY
+    ): Response<PokemonsResponse>
+
 }
